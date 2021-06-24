@@ -5,23 +5,26 @@ import java.io.Serializable;
 public class Student implements Serializable {
     private int id;
     private String name;
-    private String studentID;
-    private double gpa;
+    private int yearOB;
+    private String hometown;
+    private int year;
 
     public Student() {
     }
 
-    public Student(String name, String studentID, double gpa) {
+    public Student(String name, int yearOB, String hometown, int year) {
         this.name = name;
-        this.studentID = studentID;
-        this.gpa = gpa;
+        this.yearOB = yearOB;
+        this.hometown = hometown;
+        this.year = year;
     }
 
-    public Student(int id, String name, String studentID, double gpa) {
+    public Student(int id, String name, int yearOB, String hometown, int year) {
         this.id = id;
         this.name = name;
-        this.studentID = studentID;
-        this.gpa = gpa;
+        this.yearOB = yearOB;
+        this.hometown = hometown;
+        this.year = year;
     }
 
     public int getId() {
@@ -40,19 +43,28 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public String getStudentID() {
-        return studentID;
+    public int getYearOB() {
+        return yearOB;
     }
 
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setYearOB(int yearOB) {
+        this.yearOB = yearOB;
     }
 
-    public double getGpa() {
-        return gpa;
+    public String getHometown() {
+        return hometown;
     }
 
-    public void setGpa(double gpa) {
-        this.gpa = gpa;
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
     }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
 }
