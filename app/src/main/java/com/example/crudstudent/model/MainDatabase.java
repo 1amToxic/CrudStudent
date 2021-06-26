@@ -44,19 +44,19 @@ public class MainDatabase extends SQLiteOpenHelper {
     public static final String SC_ID_CLA = "idClass";
 
     private static final String SQL_CREATE_STU =
-            "CREATE TABLE " + TABLE_NAME_STU + " (" +
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_STU + " (" +
                     S_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     S_NAME + " TEXT," +
                     S_YEAROB + " INTEGER," +
                     S_HOMETOWN + " TEXT, " +
                     S_YEAR + " INTEGER)";
     private static final String SQL_CREATE_CLASS =
-            "CREATE TABLE " + TABLE_NAME_CLASS + " (" +
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_CLASS + " (" +
                     C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     C_NAME + " TEXT," +
                     C_DES + " TEXT)";
     private static final String SQL_CREATE_STU_IN_CLASS =
-            "CREATE TABLE " + TABLE_NAME_STU_CLASS + " (" +
+            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_STU_CLASS + " (" +
                     SC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     SC_ID_STU + " INTEGER," +
                     SC_ID_CLA + " INTEGER)";
@@ -82,15 +82,11 @@ public class MainDatabase extends SQLiteOpenHelper {
 
     public long addStudent(Student student) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(S_NAME, student.getName());
         values.put(S_YEAROB, student.getYearOB());
         values.put(S_HOMETOWN, student.getHometown());
         values.put(S_YEAR, student.getYear());
-
-        // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(TABLE_NAME_STU, null, values);
         db.close();
         return newRowId;
@@ -102,8 +98,6 @@ public class MainDatabase extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Student student = new Student();
@@ -120,13 +114,9 @@ public class MainDatabase extends SQLiteOpenHelper {
 
     public long addClass(ClassUni classUni) {
         SQLiteDatabase db = this.getWritableDatabase();
-
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(C_NAME, classUni.getName());
         values.put(C_DES, classUni.getDes());
-
-        // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(TABLE_NAME_CLASS, null, values);
         db.close();
         return newRowId;
@@ -134,9 +124,8 @@ public class MainDatabase extends SQLiteOpenHelper {
 
     public List<ClassUni> getAllClass() {
         List<ClassUni> listStudent = new ArrayList<>();
-//        String selectQuery = "SELECT  c.id,c.name,c.des,COUNT(s.id) FROM " + TABLE_NAME_CLASS+" as c,"
-//                +TABLE_NAME_STU+" as s GROUP BY c.id";
-        String selectQuery = "Select * from " + TABLE_NAME_CLASS;
+//        String selectQuery = "select * from classUni";
+        String selectQuery = "select  count(sc.id) as quantity,c.id,c.name,c.des from classuni as c, stuclass as sc where c.id = sc.idClass group by c.id order by quantity desc;";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -145,10 +134,10 @@ public class MainDatabase extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 ClassUni classUni = new ClassUni();
-                classUni.setId(cursor.getInt(0));
-                classUni.setName(cursor.getString(1));
-                classUni.setDes(cursor.getString(2));
-//                classUni.setNumberStu(cursor.getInt(3));
+                classUni.setNumberStu(cursor.getInt(0));
+                classUni.setId(cursor.getInt(1));
+                classUni.setName(cursor.getString(2));
+                classUni.setDes(cursor.getString(3));
                 listStudent.add(classUni);
             } while (cursor.moveToNext());
         }

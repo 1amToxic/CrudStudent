@@ -34,7 +34,6 @@ public class ListStudentActivity extends AppCompatActivity {
         } else {
             studentAdapter = new StudentAdapter(this);
             studentAdapter.setListStudent(MainDatabase.getInstance(this).getAllStudent());
-
             binding.recyclerStu.setAdapter(studentAdapter);
             binding.recyclerStu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             binding.addStudent.setOnClickListener(v -> startActivity(new Intent(this, AddStudentActivity.class)));

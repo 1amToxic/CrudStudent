@@ -41,6 +41,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull StudentAdapter.StudentViewHolder holder, int position) {
         holder.bind(listStudent.get(position));
+        //10 di qua 10 lan
     }
 
     @Override

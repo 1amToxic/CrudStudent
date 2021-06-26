@@ -61,7 +61,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             this.binding = binding;
         }
         void bind(ClassUni classUni){
-            binding.tvName.setText(classUni.getName());
+            binding.tvName.setText(classUni.getName()+" Co: "+classUni.getNumberStu()+" Sinh vien");
             binding.tvDes.setText(classUni.getDes());
             binding.getRoot().setOnClickListener(v ->{
                 Intent intent = new Intent(context, DetailActivity.class);

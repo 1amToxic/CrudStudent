@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CrudStudent">
-        <activity android:name=".ui.AddStudentInClassActivity"></activity>
+        <activity android:name=".ui.MainActivity3"></activity>
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.AddStudentInClassActivity" />
         <activity android:name=".ui.DetailActivity" />
         <activity android:name=".ui.ListStudentActivity" />
         <activity android:name=".ui.ListClassActivity" />

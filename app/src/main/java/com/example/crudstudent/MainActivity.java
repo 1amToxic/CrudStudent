@@ -21,11 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -34,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ListClassActivity.class)));
         binding.btnStudent.setOnClickListener(v -> {
                     Intent intent = new Intent(this, ListStudentActivity.class);
-                    intent.putExtra("is_features",0);
+                    intent.putExtra("is_features", 0);
                     startActivity(intent);
                 }
         );
         binding.btnFeatures.setOnClickListener(v -> {
                     Intent intent = new Intent(this, ListStudentActivity.class);
-                    intent.putExtra("is_features",1);
+                    intent.putExtra("is_features", 1);
                     startActivity(intent);
                 }
         );
